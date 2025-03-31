@@ -1,0 +1,42 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mood Music Player</title>
+</head>
+<body>
+  <h1>Mood Music Player</h1>
+  <label for="moodInput">Enter your mood:</label>
+  <input type="text" id="moodInput" placeholder="e.g., happy, sad, relaxed">
+  <button onclick="playMusic()">Play Music</button>
+  <p id="feedback"></p>
+  <audio id="audioPlayer" controls></audio>
+
+  <script>
+    const moodToMusic = {
+      happy: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3",
+      sad: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3",
+      relaxed: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-3.mp3",
+      energetic: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-4.mp3"
+    };
+
+    function playMusic() {
+      const mood = document.getElementById('moodInput').value.toLowerCase();
+      const audioPlayer = document.getElementById('audioPlayer');
+      const feedback = document.getElementById('feedback');
+
+      if (moodToMusic[mood]) {
+        audioPlayer.src = moodToMusic[mood];
+        audioPlayer.play();
+        feedback.textContent = `Playing ${mood} music...`;
+      } else {
+        feedback.textContent = "Sorry, no music available for that mood.";
+        audioPlayer.pause();
+        audioPlayer.src = "";
+      }
+    }
+  </script>
+</body>
+</html>
